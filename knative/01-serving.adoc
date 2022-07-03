@@ -1,7 +1,7 @@
 = Setting Up Knative on Minikube
 :docinfo: shared
 
-Setup Minikube to run Knative Serving and Eventing
+Setup Minikube to run Knative Serving
 
 TLDR;
 
@@ -14,7 +14,7 @@ minikube tunnel
 
 Versions used:
 ====
-.At the time of writing May 2022
+.At the time of writing June 2022
 <1> Knative Serving 1.3.0
 <2> Knative Kourier 1.3.0
 <3> Knative Eventing 1.1.4
@@ -186,7 +186,106 @@ kubectl get pods -n kourier-system
 kubectl get svc  -n kourier-system
 ----
 
-[frame=none, stripes=odd, cols="1a", separator=|]
-|===
-|asdf
-|===
+=== Deploy Knative Serving Application
+
+. Deploy a sample app
+.. Using the https://github.com/knative/client[kn] client
++
+----
+kn service create hello \
+--image gcr.io/knative-samples/helloworld-go \
+--port 8080 \
+--env TARGET=Knative
+----
+
+.. *Optional:* Deploy a Knative Service using the equivalent yaml manifest:
++
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TARGET
+              value: "Knative"
+EOF
+----
+
+. Wait for Knative Service to be Ready
++
+----
+kubectl wait ksvc hello --all --timeout=-1s --for=condition=Ready
+----
+
+. Get the URL of the new Service
++
+----
+SERVICE_URL=$(kubectl get ksvc hello -o jsonpath='{.status.url}')
+echo $SERVICE_URL
+----
+
+. Test the App
++
+----
+curl $SERVICE_URL
+----
+.. The output should be
++
+----
+Hello Knative!
+----
+
+. Check the knative pods that scaled from zero
++
+----
+kubectl get pod -l serving.knative.dev/service=hello
+----
+
+.. The output should be
++
+----
+NAME                                     READY   STATUS    RESTARTS   AGE
+hello-r4vz7-deployment-c5d4b88f7-ks95l   2/2     Running   0          7s
+----
+
+.. Try the service `url` on your browser (command works on linux and macos)
++
+----
+open $SERVICE_URL
+----
+
+. You can watch the pods and see how they scale down to zero after http traffic stops to the url
++
+----
+kubectl get pod -l serving.knative.dev/service=hello -w
+----
+
+.. The output should look something like this
++
+----
+NAME                                     READY   STATUS
+hello-r4vz7-deployment-c5d4b88f7-ks95l   2/2     Running
+hello-r4vz7-deployment-c5d4b88f7-ks95l   2/2     Terminating
+hello-r4vz7-deployment-c5d4b88f7-ks95l   1/2     Terminating
+hello-r4vz7-deployment-c5d4b88f7-ks95l   0/2     Terminating
+----
+
+. If we try to access the url again, and you will see a new pod running again.
++
+----
+NAME                                     READY   STATUS
+hello-r4vz7-deployment-c5d4b88f7-rr8cd   0/2     Pending
+hello-r4vz7-deployment-c5d4b88f7-rr8cd   0/2     ContainerCreating
+hello-r4vz7-deployment-c5d4b88f7-rr8cd   1/2     Running
+hello-r4vz7-deployment-c5d4b88f7-rr8cd   2/2     Running
+----
+
+**We now have Knative Serving running!**
