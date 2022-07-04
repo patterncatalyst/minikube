@@ -1,0 +1,190 @@
+= Setting Up Knative Eventing on Minikube
+:docinfo: shared
+:source-highlighter: highlightjs
+:highlightjs-languages: yaml
+
+== Install Knative Eventing
+
+. Select the version of Knative Eventing to install
++
+----
+export KNATIVE_EVENTING_VERSION="1.0.0"
+----
+. Install Knative Eventing in namespace `knative-eventing`
++
+[source, console]
+----
+kubectl apply --filename https://github.com/knative/eventing/releases/download/knative-v${KNATIVE_EVENTING_VERSION}/eventing-crds.yaml
+kubectl wait --for=condition=Established --all crd
+
+kubectl apply --filename https://github.com/knative/eventing/releases/download/knative-v${KNATIVE_EVENTING_VERSION}/eventing-core.yaml
+
+kubectl wait pod --timeout=-1s --for=condition=Ready -l '!job-name' -n knative-eventing
+
+kubectl apply --filename https://github.com/knative/eventing/releases/download/knative-v${KNATIVE_EVENTING_VERSION}/in-memory-channel.yaml
+
+kubectl wait pod --timeout=-1s --for=condition=Ready -l '!job-name' -n knative-eventing
+
+kubectl apply --filename https://github.com/knative/eventing/releases/download/knative-v${KNATIVE_EVENTING_VERSION}/mt-channel-broker.yaml
+
+kubectl wait pod --timeout=-1s --for=condition=Ready -l '!job-name' -n knative-eventing
+----
+
+== Deploy Knative Eventing Application
+
+- Set the example Namspace
+----
+NAMESPACE=default
+----
+
+- Create a broker
+[source, yaml]
+----
+    kubectl apply -f - <<EOF
+    apiVersion: eventing.knative.dev/v1
+    kind: broker
+    metadata:
+      name: example-broker
+      namespace: $NAMESPACE
+    EOF
+----
+
+- Verify broker
+----
+    kubectl -n $NAMESPACE get broker example-broker
+----
+
+- Shoud print the address of the broker
+----
+    NAME             URL                                                                               AGE   READY   REASON
+    example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker   47s   True
+----
+
+- To deploy the `hello-display` consumer to your cluster, run the following command:
+[source, yaml]
+----
+    kubectl -n $NAMESPACE apply -f - << EOF
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: hello-display
+    spec:
+      replicas: 1
+      selector:
+        matchLabels: &labels
+          app: hello-display
+      template:
+        metadata:
+          labels: *labels
+        spec:
+          containers:
+            - name: event-display
+              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+    ---
+
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: hello-display
+    spec:
+      selector:
+        app: hello-display
+      ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
+    EOF
+----
+
+- Create a trigger by entering the following command:
+[source, yaml]
+----
+    kubectl -n $NAMESPACE apply -f - << EOF
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: hello-display
+    spec:
+      broker: example-broker
+      filter:
+        attributes:
+          type: greeting
+      subscriber:
+        ref:
+          apiVersion: v1
+          kind: Service
+          name: hello-display
+    EOF
+----
+
+- Install Knative DomainMapping
+----
+    kubectl apply -f https://github.com/knative/serving/releases/download/v$KNATIVE_VERSION/serving-domainmapping-crds.yaml
+    kubectl wait --for=condition=Established --all crd
+    kubectl apply -f https://github.com/knative/serving/releases/download/v$KNATIVE_VERSION/serving-domainmapping.yaml
+----
+
+- Enable broker domain for DomainMapping
+[source, yaml]
+----
+    kubectl apply -f - <<EOF
+    apiVersion: networking.internal.knative.dev/v1alpha1
+    kind: ClusterDomainClaim
+    metadata:
+      name: broker-ingress.knative-eventing.127.0.0.1.nip.io
+    spec:
+      namespace: knative-eventing
+    EOF
+----
+
+- Expose broker externally using DomainMapping CRD on `broker-ingress.knative-eventing.127.0.0.1.nip.io`
+[source, yaml]
+----
+    kubectl -n knative-eventing apply -f - << EOF
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: DomainMapping
+    metadata:
+      name: broker-ingress.knative-eventing.127.0.0.1.nip.io
+    spec:
+      ref:
+        name: broker-ingress
+        kind: Service
+        apiVersion: v1
+    EOF
+----
+
+- Send a Cloud Event usnig `curl` pod created in the previous step.
+----
+    curl -s -v  "http://broker-ingress.knative-eventing.127.0.0.1.nip.io/$NAMESPACE/example-broker" \
+      -X POST \
+      -H "Ce-Id: say-hello" \
+      -H "Ce-Specversion: 1.0" \
+      -H "Ce-Type: greeting" \
+      -H "Ce-Source: not-sendoff" \
+      -H "Content-Type: application/json" \
+      -d '{"msg":"Hello Knative!"}'
+----
+
+- Verify the events were received
+----
+    kubectl -n $NAMESPACE logs -l app=hello-display --tail=100
+----
+
+- Successful events should look like this
+[source, yaml]
+----
+    Context Attributes,
+      specversion: 1.0
+      type: greeting
+      source: not-sendoff
+      id: say-hello
+      datacontenttype: application/json
+    Extensions,
+      knativearrivaltime: 2020-11-06T18:29:10.448647713Z
+      knativehistory: default-kne-trigger-kn-channel.default.svc.cluster.local
+    Data,
+      {
+        "msg": "Hello Knative!"
+      }
+----
