@@ -105,7 +105,7 @@ minikube update-check
 
 If you don't have the latest version of minikube and wish to update:
 
-file:///..//./upgrade/minikube-upgrade.sh[Update Minikube Bash Script]
+link:../upgrade/minikube-upgrade.sh[Update Minikube Bash Script]
 
 === Start Minikube
 Now we can start minikube:
