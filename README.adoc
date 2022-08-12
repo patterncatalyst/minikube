@@ -7,8 +7,8 @@ This is my personal Minikube tutorial.
 [discrete]
 ==== Table of Contents
 ====
-<1> Prerequisites
-<2> Installation
+<1> link:./01-prerequisites.adoc[Prerequisites]
+<2> link:./02-installation.adoc[Installation]
 <3> Start Minikube
 <4> Reference Manifests
 <5> Deploy Application

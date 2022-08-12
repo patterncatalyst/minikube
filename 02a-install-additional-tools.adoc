@@ -1,0 +1,59 @@
+= Install Additional Tools
+
+You may wish to install some additional tools to assist with Kubernetes.
+
+== Tools for Kubernetes
+
+[NOTE]
+All of the MacOS downloads are *amd* links.  If you have a newer Mac, link to the
+releases for that tool.
+
+[.stripes-even, %header, cols="1,1,1"]
+|===
+|*Tool* | *Mac* | *Fedora*
+|Git
+|https://git-scm.com/download/mac[Download]
+|dnf install git
+|kubectl
+|https://storage.googleapis.com/kubernetes-release/release/v1.23.0/bin/darwin/amd64/kubectl[Download]
+|https://storage.googleapis.com/kubernetes-release/release/v1.23.0/bin/linux/amd64/kubectl[Download]
+|https://github.com/wercker/stern[stern]
+|brew install stern
+|Although you can install stern through a direct download, I have found, it will probably not work
+correctly on Linux with minikube.  The easiest way to get it working is to install a kubectl
+plugin called https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew] first.
+Then install stern via krew:
+
+kubectl krew install stern
+|https://github.com/mikefarah/yq[yq]
+|https://github.com/mikefarah/yq/releases/download/2.4.1/yq_darwin_amd64[Download]
+|https://github.com/mikefarah/yq/releases/download/2.4.1/yq_linux_amd64[Download]
+|https://httpie.org/[httpie]
+|brew install httpie
+|dnf install httpie
+|https://github.com/rakyll/hey[hey]
+|brew install hey
+|https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64[Download]
+|kubectx and kubens
+|brew install kubectx
+|https://github.com/ahmetb/kubectx[Can be downloaded as a bash script or as a plugin for krew]
+|watch
+|brew install watch
+|dnf install procps-ng
+|kapp
+|
+brew tap vmware-tanzu/carvel
+
+ brew install kapp
+
+ kapp version
+| https://carvel.dev/kapp/docs/v0.49.0/install/[kapp install]
+|ytt
+|
+brew tap vmware-tanzu/carvel
+
+brew install ytt
+
+ytt version
+| https://carvel.dev/ytt/docs/v0.41.0/install/[ytt install]
+|===

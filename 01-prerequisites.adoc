@@ -1,0 +1,29 @@
+= Prerequisites
+:docinfo: shared
+:!toc:
+
+Minikube requires the following to work properly.
+
+====
+<1> 2 CPUs or more
+<2> 2 GB of free memory
+<3> 20 GB of free disk space
+<4> Good internet connection
+<5> Container or virtual machine manager: Docker, containerd, Podman, VirtualBox, Hyperkit
+====
+
+----
+Note: When I am running Minikube on Fedora, I typically use containerd and on Mac M1 Docker
+----
+
+====
+Configuration on Mac and Fedora to run most of what I want.
+
+Minikube Configuration
+----
+minikube config set cpus 6
+minikube config set memory 16384
+minikube config set kubernetes-version v1.22.2
+minikube config set container-runtime containerd
+----
+====

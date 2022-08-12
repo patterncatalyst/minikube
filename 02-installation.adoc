@@ -1,0 +1,37 @@
+= Installing Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+Installation of Minikube is very straight forward.
+
+== Install Minikube
+An appropriate place to start is here:
+
+https://minikube.sigs.k8s.io/docs/start/[Minikube Start]
+
+Select the appropriate OS.
+
+image::install.png[]
+
+
+After copying the installation script, paste it into a terminal and execute it.
+
+----
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
+sudo install minikube-darwin-amd64 /usr/local/bin/minikube
+----
+
+== Verify the Install
+
+Then Verify the installation with by checking the minikube version.
+
+----
+minikube version
+----
+
+== (Optional) Additional Tools
+
+Additional Kubernetes tools can be found here.
+
+link:./02a-install-additional-tools.adoc[Additional Tools]

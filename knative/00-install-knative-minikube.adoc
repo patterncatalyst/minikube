@@ -105,7 +105,7 @@ minikube update-check
 
 If you don't have the latest version of minikube and wish to update:
 
-link:../upgrade/minikube-upgrade.sh[Update Minikube Bash Script]
+link:../bin/minikube-upgrade.sh[Update Minikube Bash Script]
 
 === Start Minikube
 Now we can start minikube:
@@ -115,7 +115,7 @@ minikube start
 
 Alternatively, we can use our local bash script:
 
-file:///./bin/start-minikube.sh[Start minikube Bash Script]
+link:../bin/start-minikube.sh[Start minikube Bash Script]
 
 After starting minikube, you will need an EXTERNAL-IP for Kourier.  In another terminal window:
 

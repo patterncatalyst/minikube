@@ -1,0 +1,59 @@
+= Start Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+Many people prefer to use virtualbox as the driver.  I prefer to use Docker, however, the NodePort services may not work properly.
+
+== Start Minikube
+If you do not have VirtualBox, Vagrant or Docker installed, please go ahead and do so.
+
+====
+*Note:* If you do not have *kubectl* installed, please go link:https://kubernetes.io/docs/tasks/tools/[here] and install it.
+====
+
+Now we can start minikube:
+----
+minikube start --driver=docker
+----
+
+If minikube is running, we should get something like the following for output.
+image:minikube-start.png[]
+
+
+Verify that minikube is running
+----
+minikube status
+----
+
+We should get output like the following:
+----
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+----
+
+Alternatively, we can use this local bash script:
+
+link:../bin/start-minikube.sh[Start minikube Bash Script]
+
+== Clean And Check Minikube
+
+If you want to make sure you are using a clean environment, you should first delete the VM:
+
+----
+minikube delete
+----
+
+If you aren't sure you are running the latest version of minikube:
+
+----
+minikube update-check
+----
+
+If you don't have the latest version of minikube and wish to update:
+
+link:../bin/minikube-upgrade.sh[Update Minikube Bash Script]
