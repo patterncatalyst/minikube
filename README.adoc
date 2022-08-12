@@ -9,7 +9,7 @@ This is my personal Minikube tutorial.
 ====
 <1> link:./01-prerequisites.adoc[Prerequisites]
 <2> link:./02-installation.adoc[Installation]
-<3> Start Minikube
+<3> link:./03-start-minikube.adoc[Start Minikube]
 <4> Reference Manifests
 <5> Deploy Application
 <6> Get Minikube IP and Service Endpoints
