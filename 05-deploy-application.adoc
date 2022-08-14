@@ -20,3 +20,19 @@ This gets deployed in the default namespace.
 ----
 kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/nginx.yaml
 ----
+
+Get the deployment status.
+
+----
+kubectl get deployments
+----
+
+image:get-deployments.png[]
+
+Get the service.  We can now see the nginx-service.
+
+----
+kubectl get service
+----
+
+image:get-service.png[]
