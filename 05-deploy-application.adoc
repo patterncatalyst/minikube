@@ -18,5 +18,5 @@ Deploy the manifest directly using the raw git URL.
 This gets deployed in the default namespace.
 
 ----
-kubectl apply -f https://raw.githubusercontent.com/scriptcamp/minikube/main/nginx.yaml
+kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/nginx.yaml
 ----
