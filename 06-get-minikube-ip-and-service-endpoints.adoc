@@ -1,0 +1,31 @@
+= Get Minikube IP and Service Endpoints
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+To get the node IP of minikube, we execute the following command.
+We can use the IP to access nodePorts.
+
+----
+minikube ip
+----
+
+image:minikube-ip.png[]
+
+We can also get the service endpoint directly using the following minikube command.
+
+----
+minikube service list
+----
+
+image:minikube-service-list.png[]
+
+With the service name, we can get the URL to a specific service.
+
+----
+minikube service --url <service-name>
+----
+
+image:minikube-service-url.png[]
+
+image:minikube-deployed-url.png[]

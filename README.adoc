@@ -11,8 +11,8 @@ This is my personal Minikube tutorial.
 <2> link:./02-installation.adoc[Installation]
 <3> link:./03-start-minikube.adoc[Start Minikube]
 <4> link:./manifests/README.adoc[Reference Manifests]
-<5> Deploy Application
-<6> Get Minikube IP and Service Endpoints
+<5> link:./05-deploy-application.adoc[Deploy Application]
+<6> link:./06-get-minikube-ip-and-service-endpoints.adoc[Get Minikube IP and Service Endpoints]
 <7> Access Nodeport on Minikube
 <8> Create Persistent Volumes
 <9> Create Dynamic Volumes
