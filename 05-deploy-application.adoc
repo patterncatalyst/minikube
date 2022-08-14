@@ -1,0 +1,22 @@
+= Deploy and Application to Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+
+Deploy an sample Nginx application.
+
+The link:./manifests/nginx.yaml[manifest] contains the following:
+
+====
+<1> A configmap with custom nginx html
+<2> Nginx deployment
+<3> Service with 32000 nodeport
+====
+
+Deploy the manifest directly using the raw git URL.
+This gets deployed in the default namespace.
+
+----
+kubectl apply -f https://raw.githubusercontent.com/scriptcamp/minikube/main/nginx.yaml
+----
