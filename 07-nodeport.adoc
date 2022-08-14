@@ -1,0 +1,12 @@
+= Nodeport on Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+To get the service endpoint with the NodePort directly using the service name,
+we can execute the following command to get the full service URL with assigned
+NodePort.
+
+----
+minikube service nginx-service --url
+----

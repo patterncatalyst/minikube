@@ -2,7 +2,7 @@
 :docinfo: shared
 :!toc:
 
-This is my personal Minikube tutorial.
+My personal Minikube tutorial.
 
 [discrete]
 ==== Table of Contents
@@ -13,7 +13,7 @@ This is my personal Minikube tutorial.
 <4> link:./manifests/README.adoc[Reference Manifests]
 <5> link:./05-deploy-application.adoc[Deploy Application]
 <6> link:./06-get-minikube-ip-and-service-endpoints.adoc[Get Minikube IP and Service Endpoints]
-<7> Access Nodeport on Minikube
+<7> link:./07-nodeport.adoc[Access Nodeport on Minikube]
 <8> Create Persistent Volumes
 <9> Create Dynamic Volumes
 <10> Minikube Addons
@@ -27,4 +27,25 @@ This is my personal Minikube tutorial.
 <18> Istio
 <19> IntelliJ Plugins
 <20> VSCode Plugins
+<21> Kubectl
+<22> Helm
+<23> Alternative - Docker Compose
+<24> Alternative - Podman
 ====
+
+[discrete]
+==== Reference Source Material
+I have used several sources for my personal tutorial and several of these may not be Minikube specifically, yet have very good Minikube information or instructions.
+
+[.stripes-even, %header, cols="1, 1"]
+|===
+| *Source* | *Author*
+|https://minikube.sigs.k8s.io/docs/handbook/[Minikube Handbook]
+|Minikube sig
+|https://devopscube.com/kubernetes-minikube-tutorial/[Kubernetes Minikube Tutorial]
+|Bibin Wilson
+|https://redhat-scholars.github.io/kubernetes-tutorial/kubernetes-tutorial/installation.html[Kubernetes Tutorial]
+|Red Hat Developer
+|https://github.com/csantanapr/knative-minikube[knative-minikube]
+|Carlos Santana
+|===

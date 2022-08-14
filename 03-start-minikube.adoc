@@ -36,9 +36,59 @@ apiserver: Running
 kubeconfig: Configured
 ----
 
-Alternatively, we can use this local bash script:
+== Interact with the cluster
+
+If we have kubectl installed, we can now access the cluster.
+
+----
+kubectl get po -A
+----
+
+image:kubectl-get-pods.png[]
+
+We can also use Minikube to download and use kubectl.
+
+----
+minikube kubectl -- get po -A
+----
+
+image:minikube-kubectl-get-pods.png[]
+
+Alternatively, we can use this local bash script to start Minikube:
 
 link:../bin/start-minikube.sh[Start minikube Bash Script]
+
+== Managing the cluster
+
+Pause Kubernetes without impacting deployed applications.
+----
+minikube pause
+----
+
+Unpause a paused instance.
+----
+minikube unpause
+----
+
+Halt a cluster.
+----
+minikube stop
+----
+
+Increase the default memory limit (requiring a restart).
+----
+minikube config set memory 16384
+----
+
+Browse the catalog for Kubernetes services.
+----
+minikube addons list
+----
+
+Create a second cluster running an older Kubernetes release.
+----
+minikube start -p <profile name> --kubernetes-version=v1.16.1
+----
 
 == Clean And Check Minikube
 

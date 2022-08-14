@@ -1,0 +1,32 @@
+= Creating a Persistent Volume on Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+If any of our applications require a persistent volume, we can use the host path type.
+
+----
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0001
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /data/pv0001/
+----
+
+And we can create the persisten volume using the GitHub manifest directly.
+
+----
+kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/pv.yaml
+----
+
+Then use kubectl to get the persistent volume.
+
+----
+kubectl get pv
+----

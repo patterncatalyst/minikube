@@ -3,8 +3,6 @@
 
 Setup Minikube to run Knative Serving
 
-https://github.com/csantanapr/knative-minikube[Source: Carlos Santana knative-minikube]
-
 TLDR;
 
 ----
@@ -133,7 +131,7 @@ minikube -p knativesandbox addons enable registry
 
 === Install Using *kapp* and *ytt*
 
-link:./install-knative.sh[Install Bash Script]
+link:../bin/install-knative.sh[Install Bash Script]
 
 === Install Knative Serving using *kubectl*
 
