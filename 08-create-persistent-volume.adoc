@@ -19,7 +19,7 @@ spec:
     path: /data/pv0001/
 ----
 
-And we can create the persisten volume using the GitHub manifest directly.
+And we can create the persistent volume using the GitHub manifest directly.
 
 ----
 kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/pv.yaml

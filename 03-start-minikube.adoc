@@ -36,6 +36,21 @@ apiserver: Running
 kubeconfig: Configured
 ----
 
+== Runtime Configuration
+
+The default container runtime in minikube varies and one can be explicitly set.
+----
+minikube start --container-runtime=docker
+----
+
+Other options include:
+
+* https://github.com/containerd/containerd[containerd]
+* https://github.com/cri-o/cri-o[cri-o]
+
+
+
+
 == Interact with the cluster
 
 If we have kubectl installed, we can now access the cluster.

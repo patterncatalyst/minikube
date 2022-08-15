@@ -1,0 +1,23 @@
+= Minikube Dashboard
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+If the dashboard addon is enabled, we can access the Kubernetes dashboard using a
+minikube command.
+
+This will open the Kubernetes dashboard in the default browser.
+
+----
+minikube dashboard
+----
+
+image:minikube-dashboard.png[]
+
+If we simply want the dashboard URL, we can execute the following command.
+
+----
+minikube dashboard --url
+----
+
+image:minikube-dashboard-proxy.png[]

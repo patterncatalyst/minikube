@@ -1,0 +1,70 @@
+= Multiple Clusters using Profiles
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+We can run multiple minikube cluster instances using minikube profiles.
+
+== Creating Minikube Profiles
+
+To create a cluster with a profile, we need to create the cluster with a profile flag
+and a profile name.
+
+-----
+minikube start -p <profile name>
+-----
+
+The following command creates a minikube cluster with a profile.
+
+----
+minikube start -p knativesandbox
+----
+
+We can then list all the profiles using the _list_ command.
+
+----
+minikube profile list
+----
+
+This will give us an output showing all the minikube profiles with information such as;
+IP, driver, runtime, status etc...
+
+image:minikube-profile-list.png[]
+
+If we then need to delete a minikube profile, we can use the the following command.
+
+----
+minikube delete -p <profile name>
+----
+
+This will delete all the configurations related to the profile.
+
+----
+minikube delete -p dev
+----
+
+image:minikube-profile-delete.png[]
+
+== Switching Between Minikube Profiles
+
+If we have multiple active minikube profiles, we can switch between profiles using the
+minikube command.
+
+To switch to the _dev_ example profile, we can execute the following which will also
+switch the kubectl context to that cluster.
+
+----
+minikube profile dev
+----
+
+If we need to determine the _current_ profile, we can run the following command.
+
+----
+minikube profile
+----
+
+We can also set the profile or pass the profile flag with all minikube commands.
+
+----
+minikube service list -p dev
+----

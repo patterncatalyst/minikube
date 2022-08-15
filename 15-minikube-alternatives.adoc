@@ -1,0 +1,25 @@
+= Minikube Alternatives
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+There are several open-source Minikube alternatives for a local workstation setup.
+
+====
+<1> https://kind.sigs.k8s.io/[Kind]
+<2> https://k3s.io/[k3s]
+<3> https://microk8s.io/[MicroK8s]
+<4> https://microshift.io/docs/getting-started/[MicroShift]
+====
+
+Currently, only Minikube has the support options for working with all the following drivers:
+
+* Hyperkit
+* Hyper-V
+* KVM
+* Parallels
+* Podman
+* Docker
+* containerd
+* VirtualBox
+* VMWare

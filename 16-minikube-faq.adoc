@@ -1,0 +1,37 @@
+= Minikube FAQs
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+[discrete]
+== As a developer, you use Minikube all the time?
+No.  As a developer, I primarily work on a Fedora machine and typically use Podman
+for my development.  If I am working on a Mac, I tend to use docker-compose.
+
+When I need to test something to run in Kubernetes and do not need a cluster
+using OpenShift or GKE, I use Minikube to test on my workstation because it does
+nearly everything I need as a developer.  Only some networking things from an admin
+perspective are lacking normally.
+
+[discrete]
+== How can I view the Minikube dashboard?
+
+To access the minikube dashboard, enable the minikube dashboard addon.  Look in
+the Minikube Dashboard section.
+
+[discrete]
+== How can I deploy and application?
+
+Deploy applications using _kubectl_ as any normal Kubernetes cluster.
+
+[discrete]
+== Can we run multiple clusters in a single workstation?
+
+Yes, using Minikube profiles.  Look at the Minikube Multi-cluster Profiles section.
+
+[discrete]
+== Can we use a custom Docker registry with Minikube?
+
+To use a customer private docker registry, we need to install the
+[.silver-background]#registry-creds# Minikube addon and configure the registry
+details.  https://minikube.sigs.k8s.io/docs/handbook/registry/[Instructions here.]

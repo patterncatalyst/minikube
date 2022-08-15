@@ -1,0 +1,22 @@
+= Multi-Node Minikube Cluster
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+When working on your on workstation, we may occasionally have the desire to run a
+multi-node cluster with Minikube.
+
+To accomplish this, we have to pass the [.silver-background]#--nodes# flag with the
+required number of nodes.
+
+For a 2 node Minikube cluster.
+
+----
+minikube start --nodes 2
+----
+
+We can then check the status using the following command.
+
+----
+minikube status
+----

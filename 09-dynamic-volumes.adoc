@@ -1,0 +1,41 @@
+= Creating Dynamic Volumes on Minikube
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+When Minikube is installed, a default storage class named _standard_ is created
+for dynamic provisioning.  Dynamic volume provisioning is primarily required
+when we deploy stateful applications.
+
+Minikube uses *provisioner:k8s.io/minikube-hostpath* provisioner for the dynamic
+persistent volume which creates a mount under the hostpath.
+
+PersistentVolumes are mapped to a directory inside the running minikube instance
+(usually a VM, unless we are using [.silver-background]#--driver=none#,
+[.silver-background]#--driver=docker# or [.silver-background]#--driver=podman#).
+
+PVC manifest example.
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: dynamic-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+----
+
+We can create the PVC directly from GitHub.
+----
+kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/pvc.yaml
+----
+
+Then list the PVCs.
+
+----
+kubectl get pvc
+----
+image:dynamic-volumes.png[]

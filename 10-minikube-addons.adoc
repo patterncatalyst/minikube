@@ -1,0 +1,27 @@
+= Minikube Addons
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+There are some advanced Kubernetes features that are available as minikube addons.
+For example, the Kubernetes dashboard and metrics server does not come default with
+the Minikube installation. But it is available as a minikube addon.
+Also, if you want to add a custom docker registry to minikube, you have to install
+the [.silver-background]#registry-creds# addon and configure it.
+
+By default, only the storage class addons get installed.
+
+We can list all the available add-ons with the following.
+
+----
+minikube addons list
+----
+
+image:minikube-addons-list.png[]
+
+We can enable various addons from the list using the _enable_ flag.
+
+----
+minikube addons enable dashboard
+minikube addons enable metrics-server
+----
