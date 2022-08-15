@@ -8,11 +8,10 @@ Many people prefer to use virtualbox as the driver.  I prefer to use Docker, how
 == Start Minikube
 If you do not have VirtualBox, Vagrant or Docker installed, please go ahead and do so.
 
-====
-*Note:* If you do not have *kubectl* installed, please go link:https://kubernetes.io/docs/tasks/tools/[here] and install it.
-====
+*NOTE:* If you do not have *kubectl* installed, please go link:https://kubernetes.io/docs/tasks/tools/[here] and install it.
 
-Now we can start minikube:
+.Now we can start minikube
+[source]
 ----
 minikube start --driver=docker
 ----
@@ -21,12 +20,13 @@ If minikube is running, we should get something like the following for output.
 image:minikube-start.png[]
 
 
-Verify that minikube is running
+.Verify that minikube is running
+[source]
 ----
 minikube status
 ----
 
-We should get output like the following:
+.We should get output like the following
 ----
 minikube
 type: Control Plane
@@ -39,6 +39,8 @@ kubeconfig: Configured
 == Runtime Configuration
 
 The default container runtime in minikube varies and one can be explicitly set.
+
+[source]
 ----
 minikube start --container-runtime=docker
 ----
@@ -48,13 +50,11 @@ Other options include:
 * https://github.com/containerd/containerd[containerd]
 * https://github.com/cri-o/cri-o[cri-o]
 
-
-
-
 == Interact with the cluster
 
 If we have kubectl installed, we can now access the cluster.
 
+[source]
 ----
 kubectl get po -A
 ----
@@ -63,6 +63,7 @@ image:kubectl-get-pods.png[]
 
 We can also use Minikube to download and use kubectl.
 
+[source]
 ----
 minikube kubectl -- get po -A
 ----
@@ -76,31 +77,43 @@ link:../bin/start-minikube.sh[Start minikube Bash Script]
 == Managing the cluster
 
 Pause Kubernetes without impacting deployed applications.
+
+[source]
 ----
 minikube pause
 ----
 
 Unpause a paused instance.
+
+[source]
 ----
 minikube unpause
 ----
 
 Halt a cluster.
+
+[source]
 ----
 minikube stop
 ----
 
 Increase the default memory limit (requiring a restart).
+
+[source]
 ----
 minikube config set memory 16384
 ----
 
 Browse the catalog for Kubernetes services.
+
+[source]
 ----
 minikube addons list
 ----
 
 Create a second cluster running an older Kubernetes release.
+
+[source]
 ----
 minikube start -p <profile name> --kubernetes-version=v1.16.1
 ----
@@ -109,12 +122,14 @@ minikube start -p <profile name> --kubernetes-version=v1.16.1
 
 If you want to make sure you are using a clean environment, you should first delete the VM:
 
+[source]
 ----
 minikube delete
 ----
 
 If you aren't sure you are running the latest version of minikube:
 
+[source]
 ----
 minikube update-check
 ----

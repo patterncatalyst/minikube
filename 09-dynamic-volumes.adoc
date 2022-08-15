@@ -29,13 +29,17 @@ spec:
 ----
 
 We can create the PVC directly from GitHub.
+
+[source]
 ----
 kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/pvc.yaml
 ----
 
 Then list the PVCs.
 
+[source]
 ----
 kubectl get pvc
 ----
+
 image:dynamic-volumes.png[]

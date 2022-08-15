@@ -8,6 +8,7 @@ and applications, we will require extra CPU and memory.
 
 To override the CPU and memory limits, we can explicitly specify the custom resources.
 
+[source]
 ----
 minikube start --driver=docker --memory 8192 --cpus 4
 ----
@@ -15,6 +16,7 @@ minikube start --driver=docker --memory 8192 --cpus 4
 If we want to change the CPU and memory of the existing minikube, we can execute
 the following.
 
+[source]
 ----
 minikube stop
 minikube config set memory 16384
@@ -22,6 +24,4 @@ minikube config set cpus 8
 minikube start
 ----
 
-====
-*Note:* Drivers such as Virtualbox require a delete before increasing CPU and memory.
-====
+*NOTE:* Drivers such as Virtualbox require a delete before increasing CPU and memory.

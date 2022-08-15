@@ -44,6 +44,7 @@ we cannot create a Statefulset or a persistent volume using dry-run.
 
 Create a pod YAML named _myapp_ which uses image _nginx:latest_.
 
+[source]
 ----
 kubectl run mypod --image=nginx:latest \
             --labels type=web \
@@ -54,6 +55,7 @@ kubectl run mypod --image=nginx:latest \
 
 Generate YAML for a Pod Service that exposes a NodePort.  This requires a running pod.
 
+[source]
 ----
 kubectl expose pod mypod \
     --port=80 \
@@ -67,6 +69,7 @@ kubectl expose pod mypod \
 Create a service type _nodeport_ with a port _30001_ with service to pod TCP port mapping
 on port _80_.
 
+[source]
 ----
 kubectl create service nodeport mypod \
     --tcp=80:80 \
@@ -78,6 +81,7 @@ kubectl create service nodeport mypod \
 
 Create a deployment named _mydeployment_ with image _Nginx_.
 
+[source]
 ----
 kubectl create deployment mydeployment \
     --image=nginx:latest \
@@ -88,6 +92,7 @@ kubectl create deployment mydeployment \
 
 Create a NodePort service YAML for deployment _mydeployment_ with service port _8080_.
 
+[source]
 ----
 kubectl expose deployment mydeployment \
     --type=NodePort \
@@ -99,6 +104,7 @@ kubectl expose deployment mydeployment \
 ==== Create Job YAML
  Create job named _myjob_ with _nginx_ image.
 
+[source]
 ----
 kubectl create job myjob \
    --image=nginx:latest \
@@ -109,6 +115,7 @@ kubectl create job myjob \
 
 Create a cronjob named _mycronjob_ with _nginx_ image and a cron schedule.
 
+[source]
 ----
 kubectl create cj mycronjob \
   --image=nginx:latest \

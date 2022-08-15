@@ -8,6 +8,7 @@ minikube command.
 
 This will open the Kubernetes dashboard in the default browser.
 
+[source]
 ----
 minikube dashboard
 ----
@@ -16,6 +17,7 @@ image:minikube-dashboard.png[]
 
 If we simply want the dashboard URL, we can execute the following command.
 
+[source]
 ----
 minikube dashboard --url
 ----

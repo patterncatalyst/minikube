@@ -21,12 +21,14 @@ spec:
 
 And we can create the persistent volume using the GitHub manifest directly.
 
+[source]
 ----
 kubectl apply -f https://raw.githubusercontent.com/patterncatalyst/minikube/main/manifests/pv.yaml
 ----
 
 Then use kubectl to get the persistent volume.
 
+[source]
 ----
 kubectl get pv
 ----

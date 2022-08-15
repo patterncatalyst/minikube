@@ -13,6 +13,7 @@ By default, only the storage class addons get installed.
 
 We can list all the available add-ons with the following.
 
+[source]
 ----
 minikube addons list
 ----
@@ -21,6 +22,7 @@ image:minikube-addons-list.png[]
 
 We can enable various addons from the list using the _enable_ flag.
 
+[source]
 ----
 minikube addons enable dashboard
 minikube addons enable metrics-server

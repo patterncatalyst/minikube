@@ -11,12 +11,14 @@ required number of nodes.
 
 For a 2 node Minikube cluster.
 
+[source]
 ----
 minikube start --nodes 2
 ----
 
 We can then check the status using the following command.
 
+[source]
 ----
 minikube status
 ----
