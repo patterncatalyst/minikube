@@ -1,0 +1,119 @@
+= Manifests
+:docinfo: shared
+:!toc:
+:imagesdir: ./images
+
+Quick methods for generating Kubernetes YAML manifests.
+
+=== Visual Studio Code Kubernetes Extension
+
+An easy way to create and develop k8s manifests is to to use the Visual Studio Code
+extension for Kubernetes.
+
+This extension supports local and remote k8s clusters.
+
+Start by typing the Object name in your yaml file and it will automatically show
+you options to populate the yaml.
+
+image:vscode-deployment.png[]
+
+Based on your selection, it will autogenerate
+the basic YAML structure.
+
+image:vscode-deployment-filledin.png[]
+
+The VSCode extension supports generation of:
+
+* Pods
+* Deployments
+* Statefulset
+* ReplicationSet
+* Persistent Volumes (PV)
+* Persistent Volume Claims (PVC)
+* more
+
+=== Kubectl Dry Run
+
+We can create manifests using the _kubectl_ imperative commands using the flag
+called --dry-run that helps us to create an entier manifest template.
+
+====
+*Note:* We cannot create all the Kubernetes resource YAML using dry-run.  For instance,
+we cannot create a Statefulset or a persistent volume using dry-run.
+====
+
+==== Create Pod YAML
+
+Create a pod YAML named _myapp_ which uses image _nginx:latest_.
+
+----
+kubectl run mypod --image=nginx:latest \
+            --labels type=web \
+            --dry-run=client -o yaml > mypod.yaml
+----
+
+==== Create a Pod service YAML
+
+Generate YAML for a Pod Service that exposes a NodePort.  This requires a running pod.
+
+----
+kubectl expose pod mypod \
+    --port=80 \
+    --name mypod-service \
+    --type=NodePort \
+    --dry-run=client -o yaml > mypod-service.yaml
+----
+
+==== Create NodePort Service YAML
+
+Create a service type _nodeport_ with a port _30001_ with service to pod TCP port mapping
+on port _80_.
+
+----
+kubectl create service nodeport mypod \
+    --tcp=80:80 \
+    --node-port=30001 \
+    --dry-run=client -o yaml > mypod-service.yaml
+----
+
+==== Create Deployment YAML
+
+Create a deployment named _mydeployment_ with image _Nginx_.
+
+----
+kubectl create deployment mydeployment \
+    --image=nginx:latest \
+    --dry-run=client -o yaml > mydeployment.yaml
+----
+
+==== Create Deployment Service YAML
+
+Create a NodePort service YAML for deployment _mydeployment_ with service port _8080_.
+
+----
+kubectl expose deployment mydeployment \
+    --type=NodePort \
+    --port=8080 \
+    --name=mydeployment-service \
+    --dry-run=client -o yaml > mydeployment-service.yaml
+----
+
+==== Create Job YAML
+ Create job named _myjob_ with _nginx_ image.
+
+----
+kubectl create job myjob \
+   --image=nginx:latest \
+   --dry-run=client -o yaml
+----
+
+==== Create Cronjob YAML
+
+Create a cronjob named _mycronjob_ with _nginx_ image and a cron schedule.
+
+----
+kubectl create cj mycronjob \
+  --image=nginx:latest \
+  --schedule="* * * * *" \
+  --dry-run=client -o yaml
+----

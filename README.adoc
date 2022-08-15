@@ -29,7 +29,7 @@ tutorials and Minikube Handbook (in the reference section) is the most comprehen
 <19> IntelliJ Plugins
 <20> VSCode Plugins
 <21> Kubectl
-<22> Manifests
+<22> link:./22-manifests.adoc[Manifests]
 <23> Helm
 <24> Alternative - Docker Compose
 <25> Alternative - Podman
