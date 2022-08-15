@@ -7,8 +7,8 @@ Quick methods for generating Kubernetes YAML manifests.
 
 === Visual Studio Code Kubernetes Extension
 
-An easy way to create and develop k8s manifests is to to use the Visual Studio Code
-extension for Kubernetes.
+An easy way to create and develop k8s manifests is to to use the https://code.visualstudio.com/docs/azure/kubernetes[Visual Studio Code
+extension] for Kubernetes.
 
 This extension supports local and remote k8s clusters.
 
