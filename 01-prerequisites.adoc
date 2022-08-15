@@ -1,6 +1,7 @@
 = Prerequisites
 :docinfo: shared
 :!toc:
+:source-highlighter: coderay
 
 Minikube requires the following to work properly.
 
@@ -12,18 +13,15 @@ Minikube requires the following to work properly.
 <5> Container or virtual machine manager: Docker, containerd, Podman, VirtualBox, Hyperkit
 ====
 
-----
-Note: When I am running Minikube on Fedora, I typically use containerd and on Mac M1 Docker
-----
+NOTE: When I am running Minikube on Fedora, I typically use containerd and on Mac M1 Docker
 
-====
 Configuration on Mac and Fedora to run most of what I want.
 
-Minikube Configuration
+.Minikube Configuration
+[source]
 ----
 minikube config set cpus 6
 minikube config set memory 16384
 minikube config set kubernetes-version v1.22.2
 minikube config set container-runtime containerd
 ----
-====

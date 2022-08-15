@@ -37,10 +37,8 @@ The VSCode extension supports generation of:
 We can create manifests using the _kubectl_ imperative commands using the flag
 called --dry-run that helps us to create an entier manifest template.
 
-====
-*Note:* We cannot create all the Kubernetes resource YAML using dry-run.  For instance,
+NOTE: We cannot create all the Kubernetes resource YAML using dry-run.  For instance,
 we cannot create a Statefulset or a persistent volume using dry-run.
-====
 
 ==== Create Pod YAML
 
