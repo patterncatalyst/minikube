@@ -50,4 +50,5 @@ I have used several sources for my personal tutorial and several of these may no
 |Red Hat Developer
 |https://github.com/csantanapr/knative-minikube[knative-minikube]
 |Carlos Santana
+|New reference here
 |===
